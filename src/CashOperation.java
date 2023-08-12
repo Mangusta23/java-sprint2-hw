@@ -2,12 +2,12 @@ public class CashOperation {
     public String category;
     public boolean isExpense;
     public double sumMoney;
-    public double moneyForOneItem;
+    public double quantity;
 
-    public CashOperation(String category, boolean isExpense, double sumMoney, double moneyForOneItem) {
+    public CashOperation(String category, boolean isExpense, double quantity, double sumMoney) {
         this.category = category;
         this.isExpense = isExpense;
         this.sumMoney = sumMoney;
-        this.moneyForOneItem = moneyForOneItem;
+        this.quantity = quantity;
     }
 }

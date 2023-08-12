@@ -1,6 +1,7 @@
 import java.util.HashMap;
 public class Converter {
     String[] monthsNames = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+    String[] monthsNumbers = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 
     String MonthToName(String fileName){
         HashMap<String, String> months = new HashMap<>();
@@ -17,18 +18,28 @@ public class Converter {
         return x;
     }
 
-    String numberToName(int i){
-        String x;
-        if (i > 0 && i < 10){
-            x = "0" + i;
-        }else{
-            x = Integer.toString(i);
+    String numberToName(String m){
+        String x = "";
+        for(int i = 0; i < 12; i++){
+            if(monthsNames[i] == m){
+                x = monthsNumbers[i];
+            }
         }
         return x;
     }
 
     String numberToMonth(int m){
-        String x = monthsNames[m - 1];
+        String x = monthsNames[m--];
+        return x;
+    }
+
+    int monthToNumber(String mnth){
+        int x = 0;
+        for (int i=0; i<12; i++){
+            if(mnth == monthsNames[i]){
+                x = i;
+            }
+        }
         return x;
     }
 }
