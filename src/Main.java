@@ -29,7 +29,7 @@ public class Main {
                             monthContainer.addMonth(monthName, fileName); // Создает/добавляет_в мапу <месяц(алендарное название), список с <категория, трата/прибыль, сумма, цена товара>>
                             break;
                         case 2:
-                            for (int i = 0; i <= 12; i++){
+                            for (int i = 1; i <= 12; i++){
                                 if(i < 10){
                                     fileName = "m.20210" + i + ".csv";
                                 }else{
