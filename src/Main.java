@@ -53,7 +53,6 @@ public class Main {
                     }
                     break;
                 case 4:
-                    if (yearContainer.check) {
                         if (monthContainer.monthNames.size() != 0) {
                             for (String mnth : monthContainer.monthNames) {
                                 m = converter.monthToNumber(mnth);
@@ -64,13 +63,14 @@ public class Main {
                         } else {
                             System.out.println("Отсутствует хотя бы один месячный отчет");
                         }
+                    break;
+                case 5:
+                    if (yearContainer.check) {
+                        System.out.println("Годовой отчет:");
+                        yearContainer.printReport();
                     } else {
                         System.out.println("Отсутствует годовой отчет");
                     }
-                    break;
-                case 5:
-                    System.out.println("Годовой отчет:");
-                    yearContainer.printReport();
                     break;
                 case 0:
                     System.out.println("Выход");
