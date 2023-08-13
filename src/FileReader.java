@@ -9,7 +9,7 @@ public class FileReader {
         try {
             return new ArrayList<>(Files.readAllLines(Path.of(path)));
         } catch (IOException e) {
-            System.out.println("Невозможно прочитать файл с отчётом. Возможно, файл отсутствует в нужной директории.");
+            System.out.println("Невозможно прочитать файл " + fileName + ". " + "Возможно, файл отсутствует в нужной директории.");
             return new ArrayList<>();
         }
     }

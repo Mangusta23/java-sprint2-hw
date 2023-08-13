@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -13,46 +14,27 @@ public class Main {
             int command = scanner.nextInt();
             switch (command) {
                 case 1:
-                    System.out.println("Какие файлы считывать? ");
-                    System.out.println("1 - Месячный отчет");
-                    System.out.println("2 - Все месячные отчет");
-                    System.out.println("3 - Годовой отчет");
-                    int cmnd = scanner.nextInt();
                     String fileName;
                     String monthName;
-                    switch (cmnd) {
-                        case 1:
-                            System.out.println("Введите название файла");
-                            fileName = scanner.next();
-                            monthName = converter.MonthToName(fileName); // По названию файла типа m.YYYYMM.csv возвращает название месяца
-                            //fileName – имя файла в папке resources
-                            monthContainer.addMonth(monthName, fileName); // Создает/добавляет_в мапу <месяц(алендарное название), список с <категория, трата/прибыль, сумма, цена товара>>
-                            break;
-                        case 2:
-                            for (int i = 1; i <= 12; i++){
-                                if(i < 10){
+                            for (int i = 1; i <= 12; i++) {
+                                if (i < 10) {
                                     fileName = "m.20210" + i + ".csv";
-                                }else{
+                                } else {
                                     fileName = "m.2021" + i + ".csv";
                                 }
                                 monthName = converter.MonthToName(fileName);
                                 monthContainer.addMonth(monthName, fileName);
                             }
                             break;
-                        case 3:
-                            System.out.println("Введите название файла");
-                            fileName = scanner.next();
-                            //fileName – имя файла в папке resources
-                            yearContainer.addYear(fileName); // Создает список ["месяц", "трата/прибль", "сумма"]
-                            break;
-                        default:
-                            System.out.println("Извините, такой команды пока нет.");
-                            break;
-                    }
-                    break;
                 case 2:
+                    System.out.println("Введите название файла");
+                    fileName = scanner.next();
+                    //fileName – имя файла в папке resources
+                    yearContainer.addYear(fileName); // Создает список ["месяц", "трата/прибль", "сумма"]
+                    break;
+                case 3:
                     boolean b = true;
-                    if(yearContainer.check) {
+                    if (yearContainer.check) {
                         if (monthContainer.monthNames.size() != 0) {
                             for (String mnth : monthContainer.monthNames) {
                                 if (!(monthContainer.getSum(mnth) == yearContainer.getSum(mnth))) {
@@ -63,42 +45,30 @@ public class Main {
                             if (b) {
                                 System.out.println("Все месячные отчеты сходятся с годовым");
                             }
-                        }else{
+                        } else {
                             System.out.println("Отсутствует хотя бы один месячный отчет");
-                            }
+                        }
                     } else {
                         System.out.println("Отсутстыует годовой отчет");
                     }
                     break;
-                case 3:
-                    System.out.println("Какой месяц вывести?: 0-Все отчеты");
-                    System.out.println("                      1-ЯНВ.  2-ФЕВ. 3-МАРТ. 4-АПР.  5-МАЙ.  6-ИЮНЬ.");
-                    System.out.println("                      7-ИЮЛЬ. 8-АВГ. 9-СЕН.  10-ОКТ. 11-НОЯ. 12-ДЕК.");
-                    m = scanner.nextInt();
-                    if (m == 0){
-                        if(yearContainer.check) {
-                            if (monthContainer.monthNames.size() != 0) {
-                                for (String mnth : monthContainer.monthNames) {
-                                    m = converter.monthToNumber(mnth);
-                                    System.out.println("Месячныйй отчет:");
-                                    monthContainer.printReport(m);
-                                    System.out.println(" ");
-                                }
-                            }else{
-                                System.out.println("Отсутствует хотя бы один месячный отчет");
-                            }
-                        }else{
-                            System.out.println("Отсутствует годовой отчет");
-                        }
-                    }else{
-                        if(yearContainer.check) {
-                            if (monthContainer.monthNames.size() != 0) {
+                case 4:
+                    if (yearContainer.check) {
+                        if (monthContainer.monthNames.size() != 0) {
+                            for (String mnth : monthContainer.monthNames) {
+                                m = converter.monthToNumber(mnth);
                                 System.out.println("Месячныйй отчет:");
                                 monthContainer.printReport(m);
                                 System.out.println(" ");
                             }
+                        } else {
+                            System.out.println("Отсутствует хотя бы один месячный отчет");
                         }
+                    } else {
+                        System.out.println("Отсутствует годовой отчет");
                     }
+                    break;
+                case 5:
                     System.out.println("Годовой отчет:");
                     yearContainer.printReport();
                     break;
@@ -113,9 +83,11 @@ public class Main {
 
     public static void printMenu() {
         System.out.println("Что вы хотите сделать? ");
-        System.out.println("1 - Добавить файл");
-        System.out.println("2 - Сверить месячный и годовой отчет");
-        System.out.println("3 - Вывод месячого и годового отчета");
+        System.out.println("1 - Считать все месячные отчёты");
+        System.out.println("2 - Считать годовой отчёт");
+        System.out.println("3 - Сверить отчёты");
+        System.out.println("4 - Вывести информацию обо всех месячных отчётах");
+        System.out.println("5 - Вывести информацию о годовом отчёте");
         System.out.println("0 - Выход");
     }
 }
